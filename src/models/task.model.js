@@ -1,18 +1,19 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-    titulo:{
+const taskSchema = new mongoose.Schema({
+    title:{
         type: String,
         required: true,
     },
-    descricao:{
+    description:{
         type: String,
     },
     checkbox:{
         type: Boolean,
+        default: false,
     },
 });
 
-const TarefaModel = mongoose.model("Tarefa", userSchema);
-export default TarefaModel;
+const TaskModel = mongoose.model("Tarefa", taskSchema);
+export default TaskModel;
   
