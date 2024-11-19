@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import TaskModel from "../src/models/task.model.js";
-class TaskService {
+import TaskModel from "../models/task.model.js";
+export class TaskService {
     async createTask({ title, description }) {
     
         if (!title) {
