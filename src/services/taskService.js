@@ -13,7 +13,7 @@ export class TaskService {
               description,
             });
 
-            return await newTask.create();
+            return await newTask.save();
 
         } catch (error) {
           console.error('Erro ao criar task:', error);
@@ -41,7 +41,12 @@ export class TaskService {
 
     async updateTaskStatus(id, checked) {
         try {
-            return await TaskModel.findByIdAndUpdate(id, { checked }, { new: true });
+            const updatedTask = await TaskModel.findByIdAndUpdate(
+                id,
+                { checkbox: checked },
+                { new: true }
+            );
+            return updatedTask;
         } catch (error) {
             console.error('Erro ao atualizar status da task:', error);
             throw new Error('Erro ao atualizar status da task');
@@ -50,7 +55,11 @@ export class TaskService {
 
     async deleteTask(id) {
         try {
-            return await TaskModel.findByIdAndRemove(id);
+            const deletedTask = await TaskModel.findByIdAndDelete(id);
+            if (!deletedTask) {
+                throw new Error('Tarefa não encontrada');
+            }
+        return deletedTask;
         } catch (error) {
             console.error('Erro ao excluir task:', error);
             throw new Error('Erro ao excluir task');
